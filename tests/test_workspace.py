@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 import yaml
+from typer.testing import CliRunner
 
 from corbell.core.workspace import (
     WorkspaceConfig,
@@ -37,12 +38,46 @@ def test_init_workspace_yaml(tmp_path):
     raw = yaml.safe_load(out.read_text())
     assert "services" in raw
     assert raw["workspace"]["name"] == "my-platform"
+    assert raw["llm"]["api_key"] is None
+    assert raw["integrations"]["jira"]["url"] is None
 
 
 def test_init_workspace_yaml_overwrite(tmp_path):
     out1 = init_workspace_yaml(tmp_path)
     out2 = init_workspace_yaml(tmp_path)
     assert out1 == out2
+
+
+def test_cli_init_creates_workspace_under_corbell_data(tmp_path):
+    from corbell.cli.main import app
+
+    runner = CliRunner()
+    target = tmp_path / "workspace-root"
+    target.mkdir()
+
+    result = runner.invoke(app, ["init", "--dir", str(target)])
+
+    ws_file = target / "corbell-data" / "workspace.yaml"
+    assert result.exit_code == 0, result.output
+    assert ws_file.exists()
+
+
+def test_cli_init_respects_existing_workspace_without_force(tmp_path):
+    from corbell.cli.main import app
+
+    runner = CliRunner()
+    target = tmp_path / "workspace-root"
+    ws_dir = target / "corbell-data"
+    ws_dir.mkdir(parents=True)
+    ws_file = ws_dir / "workspace.yaml"
+    original = 'version: "1"\nworkspace:\n  name: custom-platform\n'
+    ws_file.write_text(original, encoding="utf-8")
+
+    result = runner.invoke(app, ["init", "--dir", str(target)])
+
+    assert result.exit_code == 0, result.output
+    assert "already exists" in result.output
+    assert ws_file.read_text(encoding="utf-8") == original
 
 
 def test_find_workspace_root(tmp_path, sample_workspace_yaml):

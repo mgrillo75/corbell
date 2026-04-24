@@ -45,6 +45,7 @@ gcp      = ["google-cloud-aiplatform>=1.38", "anthropic[vertex]>=0.25"]
 mcp      = ["mcp>=1.1.2"]
 notion   = ["notion-client>=2.0"]
 linear   = ["requests>=2.31"]
+jira     = ["requests>=2.31"]
 # Tree-sitter grammars for accurate multi-language method extraction
 # Install with: pip install "corbell[treesitter]"
 treesitter = [

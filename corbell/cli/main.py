@@ -10,7 +10,7 @@ app = typer.Typer(
     help=(
         "🏗️  Corbell — Multi-repo architecture graph, spec generation & review for backend teams.\n\n"
         "Quick start:\n\n"
-        "  corbell init            Create workspace.yaml\n\n"
+        "  corbell init            Create corbell-data/workspace.yaml\n\n"
         "  corbell graph build     Scan repos, build service graph\n\n"
         "  corbell spec new        Generate a technical design doc\n\n"
         "  corbell spec review     Review a spec against the graph\n\n"
@@ -48,7 +48,7 @@ def init(
     from corbell.core.workspace import init_workspace_yaml
 
     target = (Path(directory) if directory else Path.cwd()).resolve()
-    ws_file = target / "corbell" / "workspace.yaml"
+    ws_file = target / "corbell-data" / "workspace.yaml"
 
     if ws_file.exists() and not force:
         console.print(
@@ -71,7 +71,7 @@ app.add_typer(graph_app, name="graph", help="Service dependency graph commands."
 app.add_typer(embeddings_app, name="embeddings", help="Code embedding index commands.")
 app.add_typer(docs_app, name="docs", help="Design doc scan and pattern learning.")
 app.add_typer(spec_app, name="spec", help="Spec lifecycle: new → lint → review → approve → decompose.")
-app.add_typer(export_app, name="export", help="Export to Notion or Linear.")
+app.add_typer(export_app, name="export", help="Export to Notion, Linear, or Jira.")
 app.add_typer(mcp_app, name="mcp", help="Model Context Protocol (MCP) server integration.")
 app.add_typer(ui_app, name="ui", help="Architecture graph browser UI — start with: corbell ui serve")
 

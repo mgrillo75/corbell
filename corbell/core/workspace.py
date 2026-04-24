@@ -420,30 +420,30 @@ spec:
 
 integrations:
   notion:
-    token: ${CORBELL_NOTION_TOKEN}
-    parent_page_id: ${CORBELL_NOTION_PAGE_ID}
+    token:
+    parent_page_id:
   linear:
-    api_key: ${CORBELL_LINEAR_API_KEY}
-    team_id: ${CORBELL_LINEAR_TEAM_ID}
-    default_project_id: ${CORBELL_LINEAR_PROJECT_ID}
+    api_key:
+    team_id:
+    default_project_id:
   jira:
-    url: ${CORBELL_JIRA_URL}
-    email: ${CORBELL_JIRA_EMAIL}
-    api_token: ${CORBELL_JIRA_API_TOKEN}
-    project_key: ${CORBELL_JIRA_PROJECT_KEY}
+    url:
+    email:
+    api_token:
+    project_key:
     issue_type: Task
 
 llm:
   # ---- Option 1: Anthropic (recommended) ----
   provider: anthropic
   model: claude-sonnet-4-5
-  api_key: ${ANTHROPIC_API_KEY}
+  api_key:
   context_budget: 100000
 
   # ---- Option 2: OpenAI ----
   # provider: openai
   # model: gpt-4o
-  # api_key: ${OPENAI_API_KEY}
+  # api_key:
 
   # ---- Option 3: AWS Bedrock (Anthropic Claude) ----
   # Two auth options:
@@ -451,7 +451,7 @@ llm:
   # A) Long-term API key (simplest — paste your Bedrock API key directly):
   # provider: aws
   # model: us.anthropic.claude-sonnet-4-20250514-v1:0
-  # api_key: ${BEDROCK_API_KEY}    # get this from AWS Bedrock console
+  # api_key:                        # get this from AWS Bedrock console
   # aws_region: us-east-1
   #
   # B) IAM credentials (boto3 credential chain):
@@ -463,7 +463,7 @@ llm:
   # ---- Option 4: Azure OpenAI ----
   # provider: azure
   # model: gpt-4o
-  # api_key: ${AZURE_OPENAI_API_KEY}
+  # api_key:
   # azure_endpoint: https://my-resource.openai.azure.com/
   # azure_deployment: my-gpt4o-deployment
   # azure_api_version: "2024-02-01"

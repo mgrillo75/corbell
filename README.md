@@ -66,6 +66,9 @@ No servers. No cloud setup. Runs entirely from your laptop against local repos.
 ```bash
 pip install corbell
 
+# From a local clone:
+pip install -e .
+
 # With LLM support (pick one):
 pip install "corbell[anthropic]"    # Claude (recommended)
 pip install "corbell[openai]"       # GPT-4o
@@ -84,7 +87,7 @@ pip install "corbell[anthropic,openai,notion,linear,jira]"
 ## 🚀 Quick Setup (2 minutes)
 
 ### Prerequisites
-- Python 3.8+ or Node.js 16+ or Go 1.19+ (based on your project)
+- Python 3.11+
 - Git repository with source code
 
 ### Essential Steps
@@ -93,7 +96,7 @@ pip install "corbell[anthropic,openai,notion,linear,jira]"
    ```bash
    corbell init
    ```
-   ✅ Creates `workspace.yaml` in your project root
+   ✅ Creates `corbell-data/workspace.yaml`
 
 2. **Generate your first design document**
    ```bash
@@ -108,7 +111,7 @@ pip install "corbell[anthropic,openai,notion,linear,jira]"
    ✅ Opens browser at http://localhost:7433
 
 ### Verify Setup
-- [ ] `workspace.yaml` exists in your project
+- [ ] `corbell-data/workspace.yaml` exists in your project
 - [ ] Design document generated successfully
 - [ ] Architecture graph loads (if using UI)
 

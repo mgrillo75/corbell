@@ -8,7 +8,7 @@ from typing import Optional
 import typer
 from rich.console import Console
 
-app = typer.Typer(help="Export spec and tasks to Notion, Linear, or Jira.")
+app = typer.Typer(help="Export specs and task files to Notion, Linear, or Jira.")
 console = Console()
 
 
